@@ -44,8 +44,8 @@ jobs:
 
       - name: Wait for Selenium to be ready
         run: |
-          echo "Waiting for Selenium to be ready on localhost:4444..."
-          for i in {1..3}; do  # Increase retries to 30
+          echo "Waiting for Selenium to be ready on selenium:4444..."
+          for i in {1..2}; do  # Increase retries to 30
             curl -s http://selenium:4444 | grep '"ready":true' && echo "Selenium is ready" && break
             echo "Waiting for Selenium..."
             sleep 5
