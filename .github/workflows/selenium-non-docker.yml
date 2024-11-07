@@ -52,7 +52,6 @@ jobs:
       # Step 5: Install WebDriver Manager and Selenium
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
           pip install selenium webdriver-manager pytest
 
       # Step 6: Run the tests
