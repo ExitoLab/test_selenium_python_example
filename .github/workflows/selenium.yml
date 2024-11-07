@@ -22,6 +22,7 @@ jobs:
         image: selenium/standalone-${{ github.event.inputs.browser }}
         ports: 
           - 4444:4444
+          - 7900:7900
         options: --shm-size=2gb
 
     steps:
@@ -43,11 +44,15 @@ jobs:
           echo "Checking if Selenium is running on port 4444..."
           ss -tuln | grep ':4444'
 
+      - name: Check docker
+        run: |
+          docker ps
+
       - name: Wait for Selenium to be ready
         run: |
           echo "Waiting for Selenium to be ready on localhost:4444..."
           for i in {1..20}; do
-            curl -s http://localhost:4444/wd/hub/status | grep '"ready":true' && echo "Selenium is ready" && break
+            curl -s http://selenium:4444/wd/hub/status | grep '"ready":true' && echo "Selenium is ready" && break
             echo "Waiting for Selenium..."
             sleep 5
           done
