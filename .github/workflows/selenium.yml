@@ -55,7 +55,7 @@ jobs:
         env:
           BROWSER: ${{ github.event.inputs.browser }}
         run: |
-          pytest test_selenium.py
+          pytest -v test_selenium.py  # Run tests in test_selenium.py explicitly
 
       - name: Upload screenshots
         uses: actions/upload-artifact@v3
