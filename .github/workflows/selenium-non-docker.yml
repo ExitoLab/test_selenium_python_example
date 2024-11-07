@@ -52,16 +52,11 @@ jobs:
       # Step 3: Install ChromeDriver
       - name: Install ChromeDriver
         run: |
-          # Get the installed Chrome version
-          CHROME_VERSION=$(google-chrome-stable --version | awk '{print $3}' | sed 's/\.[0-9]*$//')  # Extract major version
-
-          # Install the corresponding version of ChromeDriver
-          CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
-          echo "Using ChromeDriver version: $CHROMEDRIVER_VERSION"
-
-          wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+          wget https://chromedriver.storage.googleapis.com/92.0.4515.107/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/
+          sudo mv chromedriver /usr/bin/chromedriver
+          sudo chown root:root /usr/bin/chromedriver
+          sudo chmod +x /usr/bin/chromedriver
 
       # Step 5: Install WebDriver Manager and Selenium
       - name: Install dependencies
