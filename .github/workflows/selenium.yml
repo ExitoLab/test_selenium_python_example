@@ -40,10 +40,6 @@ jobs:
       #     python -m pip install  --no-cache-dir --upgrade pip
       #     pip install selenium pytest webdriver-manager
 
-      - name: Check docker
-        run: |
-          docker ps
-
       - name: Wait for Selenium to be ready
         run: |
           echo "Waiting for Selenium to be ready on localhost:4444..."
