@@ -53,6 +53,21 @@ jobs:
       - name: Install dependencies
         run: |
           pip install selenium webdriver-manager pytest
+      
+      - name: Check if port 4444 is open
+        run: |
+          echo "Checking if Selenium is running on port 4444..."
+          ss -tuln | grep ':4444'
+
+      - name: Wait for Selenium to be ready
+        run: |
+          echo "Waiting for Selenium to be ready on selenium:4444..."
+          for i in {1..2}; do  # Increase retries to 30
+            curl -s http://localhost:4444/wd/hub | grep '"ready":true' && echo "Selenium is ready" && break
+            echo "Waiting for Selenium..."
+            sleep 3
+          done
+      
 
       # Step 6: Run the tests
       - name: Run tests
