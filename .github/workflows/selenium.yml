@@ -17,6 +17,7 @@ jobs:
     name: Selenium Test
     runs-on: ubuntu-latest
 
+    container: ubuntu
     services:
       selenium:
         image: selenium/standalone-${{ github.event.inputs.browser }}
@@ -52,7 +53,7 @@ jobs:
         run: |
           echo "Waiting for Selenium to be ready on localhost:4444..."
           for i in {1..3}; do  # Increase retries to 30
-            curl -s http://localhost:4444 | grep '"ready":true' && echo "Selenium is ready" && break
+            curl -s http://selenium:4444 | grep '"ready":true' && echo "Selenium is ready" && break
             echo "Waiting for Selenium..."
             sleep 5
           done
