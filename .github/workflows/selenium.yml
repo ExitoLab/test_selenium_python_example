@@ -48,7 +48,7 @@ jobs:
           for i in {1..2}; do  # Increase retries to 30
             curl -s http://selenium:4444/wd/hub | grep '"ready":true' && echo "Selenium is ready" && break
             echo "Waiting for Selenium..."
-            sleep 5
+            sleep 3
           done
 
       - name: Run Selenium test
