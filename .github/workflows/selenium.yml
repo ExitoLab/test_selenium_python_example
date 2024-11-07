@@ -48,11 +48,6 @@ jobs:
         run: |
           docker ps
 
-      - name: Log Selenium container output
-        run: |
-          echo "Checking Selenium container logs..."
-          docker logs selenium
-
       - name: Wait for Selenium to be ready
         run: |
           echo "Waiting for Selenium to be ready on localhost:4444..."
