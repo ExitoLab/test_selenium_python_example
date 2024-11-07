@@ -64,10 +64,10 @@ jobs:
           pip install -r requirements.txt
           pip install selenium webdriver-manager pytest
       
-      - name: Check if port 4444 is open
+      # Step 4: Check if Selenium is running
+      - name: Check if Selenium is running on port 4444
         run: |
-          echo "Checking if Selenium is running on port 4444..."
-          ss -tuln | grep ':4444'
+          curl --silent --head --fail http://localhost:4444/wd/hub/status || echo "Selenium is not running"
 
       - name: Wait for Selenium to be ready
         run: |
