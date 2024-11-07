@@ -37,8 +37,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update -y  # Ensure the system is up to date
-          sudo apt-get install -y python3 python3-pip  # Install python and pip if not present
+          apt-get update -y  # Ensure the system is up to date
+          apt-get install -y python3 python3-pip  # Install python and pip if not present
           python3 -m pip install --no-cache-dir --upgrade pip  # Upgrade pip
           python3 -m pip install selenium pytest webdriver-manager  # Install dependencies
 
