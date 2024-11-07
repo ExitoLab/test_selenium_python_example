@@ -40,11 +40,6 @@ jobs:
       #     python -m pip install  --no-cache-dir --upgrade pip
       #     pip install selenium pytest webdriver-manager
 
-      - name: Check if port 4444 is open
-        run: |
-          echo "Checking if Selenium is running on port 4444..."
-          ss -tuln | grep ':4444'
-
       - name: Check docker
         run: |
           docker ps
