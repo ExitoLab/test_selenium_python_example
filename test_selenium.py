@@ -5,14 +5,14 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
 def test_open_google():
-    # Set up the ChromeDriver using WebDriverManager
-    chrome_service = Service(ChromeDriverManager().install())
+    # Set up ChromeDriver using WebDriverManager
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Optional: Run in headless mode (no GUI)
+    options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.binary_location = "/usr/bin/chromium-browser"  # Ensure Chromium is available
 
-    # Initialize WebDriver with options and the correct service
+    chrome_service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=chrome_service, options=options)
     
     driver.get("https://www.google.com")
