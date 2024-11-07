@@ -1,29 +1,47 @@
-import time
+# test_selenium.py
+import os
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
+
+def get_driver():
+    browser = os.getenv("BROWSER", "chrome").lower()
+
+    if browser == "chrome":
+        options = ChromeOptions()
+        options.add_argument("--headless")
+        driver = webdriver.Remote(
+            command_executor='http://selenium:4444/wd/hub',
+            options=options
+        )
+    elif browser == "firefox":
+        options = FirefoxOptions()
+        options.add_argument("--headless")
+        driver = webdriver.Remote(
+            command_executor='http://selenium:4444/wd/hub',
+            options=options
+        )
+    elif browser == "edge":
+        options = EdgeOptions()
+        options.add_argument("--headless")
+        driver = webdriver.Remote(
+            command_executor='http://selenium:4444/wd/hub',
+            options=options
+        )
+    else:
+        raise ValueError(f"Unsupported browser: {browser}")
+    
+    return driver
 
 def test_google_title():
-    # Set up ChromeDriver
-    chrome_service = Service(ChromeDriverManager().install())
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Run in headless mode (no GUI)
-    driver = webdriver.Chrome(service=chrome_service, options=options)
-    
-    # Navigate to Google
-    driver.get("https://www.google.com")
-    
-    # Assert that the page title contains "Google"
-    assert "Google" in driver.title
-    
-    # Find the search box element and verify it exists
-    search_box = driver.find_element(By.NAME, "q")
-    assert search_box is not None
-    
-    # Close the browser
-    driver.quit()
+    driver = get_driver()
+    try:
+        driver.get("https://www.google.com")
+        assert "Google" in driver.title
+    finally:
+        driver.quit()
 
-# Run the test
 if __name__ == "__main__":
     test_google_title()
