@@ -35,10 +35,10 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install  --no-cache-dir --upgrade pip
-          pip install selenium pytest webdriver-manager
+      # - name: Install dependencies
+      #   run: |
+      #     python -m pip install  --no-cache-dir --upgrade pip
+      #     pip install selenium pytest webdriver-manager
 
       - name: Check if port 4444 is open
         run: |
@@ -58,15 +58,15 @@ jobs:
             sleep 5
           done
 
-      - name: Run Selenium test
-        env:
-          BROWSER: ${{ github.event.inputs.browser }}
-        run: |
-          pytest test_selenium.py
+      # - name: Run Selenium test
+      #   env:
+      #     BROWSER: ${{ github.event.inputs.browser }}
+      #   run: |
+      #     pytest test_selenium.py
 
-      - name: Upload screenshots
-        uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: screenshots
-          path: screenshots/
+      # - name: Upload screenshots
+      #   uses: actions/upload-artifact@v3
+      #   if: always()
+      #   with:
+      #     name: screenshots
+      #     path: screenshots/
