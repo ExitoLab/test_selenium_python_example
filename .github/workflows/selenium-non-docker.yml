@@ -1,12 +1,16 @@
-name: Selenium Test
+name: Selenium Non Docker Test
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      browser:
+        type: choice
+        description: Which browser to test
+        required: true
+        options:
+          - chrome
+          - firefox
+          - edge
 
 jobs:
   selenium-tests:
