@@ -20,8 +20,6 @@ jobs:
     services:
       selenium:
         image: selenium/standalone-${{ github.event.inputs.browser }}
-        ports: 
-          - 4444:4444
         options: --shm-size=2gb
 
     steps:
@@ -37,11 +35,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install selenium pytest webdriver-manager
-
-      - name: Check if port 4444 is open
-      run: |
-        echo "Checking if Selenium is running on port 4444..."
-        ss -tuln | grep ':4444'
 
       - name: Wait for Selenium to be ready
         run: |
