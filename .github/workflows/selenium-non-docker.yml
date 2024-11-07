@@ -49,20 +49,17 @@ jobs:
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install ./google-chrome-stable_current_amd64.deb -y
 
-      # Step 3: Install ChromeDriver
-      - name: Install ChromeDriver
-        run: |
-          wget https://chromedriver.storage.googleapis.com/92.0.4515.107/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/bin/chromedriver
-          sudo chown root:root /usr/bin/chromedriver
-          sudo chmod +x /usr/bin/chromedriver
-
       # Step 5: Install WebDriver Manager and Selenium
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
           pip install selenium webdriver-manager pytest
+
+      # Need to fetch reqs if needed
+      - name: Installing all necessary packages
+        run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay
+      - name: Install xvfb
+        run: sudo apt-get install xvfb
 
       - name: Check if port 4444 is open
         run: |
